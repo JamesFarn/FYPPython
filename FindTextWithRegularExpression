@@ -7,5 +7,5 @@ regex = re.compile(r'\W\b\w{8}\b')
 for line in txtfile:
     eight_letter_words = regex.findall(line)
     for word in eight_letter_words:
-        print word.lstrip() #lstrip is to remove the space on the left.
+        print word.lstrip() #lstrip is to remove the space on the left...
 
