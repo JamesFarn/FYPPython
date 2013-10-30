@@ -1,0 +1,8 @@
+with open('bubble-O0-llvm-mips.asm', 'r') as searchfile: 
+    for line in searchfile:
+        if ':' in line:
+           SlicedWord = line[6:14]
+           # if the SliceWord nv contain space that mean is vaild.
+           if " " not in SlicedWord:
+               print SlicedWord
+               
