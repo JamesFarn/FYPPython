@@ -1,0 +1,23 @@
+#!/usr/bin/env python
+
+
+import binascii
+import re
+
+txtfile = open("bubble-O0-llvm-mips.asm", "r")
+regex = re.compile(r'\W\b\w{8}\b')
+
+def byte_to_binary(n):
+    return ''.join(str((n & (1 << i)) and 1) for i in reversed(range(8)))
+
+
+def hex_to_binary(h):
+    return ''.join(byte_to_binary(ord(b)) for b in binascii.unhexlify(h))
+
+
+for line in txtfile:
+    eight_letter_words = regex.findall(line)
+    for word in eight_letter_words:
+        IntWords = word.lstrip() #lstrip is to remove the space on the left.
+        print IntWords
+        print hex_to_binary(IntWords) #is using the def i declare on top
