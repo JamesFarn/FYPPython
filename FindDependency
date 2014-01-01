@@ -1,0 +1,80 @@
+#!/usr/bin/env python
+import re
+
+txtfile = open("median-O3.asm", "r")
+#regex = re.compile(r'\W\b\w{8}\b\W{9}\b[a-z]+\b\W{8}\b\w+,\w+,\w+')
+regex = re.compile(r'\b[a-z]+\b\W{8}\b\w+,\w+,\w+')
+
+RowTextLocated = 0
+i = 0
+arr = [] #array to store all
+arrOpcode = []#array for operation code 
+
+for line in txtfile:
+    
+    expression_letter_words = regex.findall(line)
+    RowTextLocated = RowTextLocated+1
+    
+    for word in expression_letter_words:
+                
+        #This is to spilt the filter out word line.
+        operation,register = word.split( );
+
+        firstR, secondR, thirdR = register.split(",");
+
+        #print RowTextLocated
+        #print operation
+        #print firstR, secondR, thirdR
+        
+        #print"Line: ", RowTextLocated, word
+        
+        
+        arr.append([])
+        arr[i].append(RowTextLocated)
+        arr[i].append(operation)
+        arr[i].append(firstR)
+        arr[i].append(secondR)
+        arr[i].append(thirdR)
+        i = i + 1
+    
+
+#print arr
+#print i
+
+
+arrCounti = 0
+arrOpcodeCounti = 0
+
+for var in arr:
+
+    if (arrCounti + 1) < i:
+
+        if arr[arrCounti][2] == arr[arrCounti + 1][3] or arr[arrCounti][2] == arr[arrCounti + 1][4]:
+
+            #___The Compare Variable___
+            #print arr[arrCounti][2]
+            #print arr[arrCounti + 1][3]
+            #print arr[arrCounti + 1][4]
+
+            #___The Row That have dependency___
+            print
+            print arr[arrCounti]
+            print arr[arrCounti + 1]
+
+            #___Store the Opcode___
+
+            arrOpcode.append([])
+            arrOpcode[arrOpcodeCounti].append(arr[arrCounti][1])
+            arrOpcode[arrOpcodeCounti].append(arr[arrCounti + 1][1])
+            
+
+            arrCounti = arrCounti + 1
+            arrOpcodeCounti = arrOpcodeCounti + 1
+        else:
+            arrCounti =  arrCounti + 1
+
+
+print arrOpcode
+
+
+#print arr[1][2]
