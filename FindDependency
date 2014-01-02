@@ -24,8 +24,7 @@ for line in txtfile:
 
         #print RowTextLocated
         #print operation
-        #print firstR, secondR, thirdR
-        
+        #print firstR, secondR, thirdR        
         #print"Line: ", RowTextLocated, word
         
         
@@ -37,44 +36,46 @@ for line in txtfile:
         arr[i].append(thirdR)
         i = i + 1
     
-
 #print arr
-#print i
-
 
 arrCounti = 0
 arrOpcodeCounti = 0
 
 for var in arr:
-
     if (arrCounti + 1) < i:
 
+        #___The Compare Variable___
         if arr[arrCounti][2] == arr[arrCounti + 1][3] or arr[arrCounti][2] == arr[arrCounti + 1][4]:
 
-            #___The Compare Variable___
-            #print arr[arrCounti][2]
-            #print arr[arrCounti + 1][3]
-            #print arr[arrCounti + 1][4]
-
             #___The Row That have dependency___
-            print
-            print arr[arrCounti]
-            print arr[arrCounti + 1]
+            #Uncomment to debug
+            #print
+            #print arr[arrCounti]
+            #print arr[arrCounti + 1]
 
             #___Store the Opcode___
 
-            arrOpcode.append([])
-            arrOpcode[arrOpcodeCounti].append(arr[arrCounti][1])
-            arrOpcode[arrOpcodeCounti].append(arr[arrCounti + 1][1])
+            arrOpcode.append(arr[arrCounti][1] + " " + arr[arrCounti + 1][1])
             
-
             arrCounti = arrCounti + 1
             arrOpcodeCounti = arrOpcodeCounti + 1
         else:
             arrCounti =  arrCounti + 1
 
 
-print arrOpcode
+#print arrOpcode
+#print 
 
+#___Count and Get the most common Opcode___
 
-#print arr[1][2] 
+from collections import Counter
+sortCountOpcode = Counter(arrOpcode)
+#_All Opcode count result_
+#print sortCountOpcode.most_common() 
+
+#___Result of Top 10 common___    
+print 'Top 10 Most common:'
+for letter, count in sortCountOpcode.most_common(10):
+    print '%s: %d' % (letter, count)
+    
+#print arr[1][2]
