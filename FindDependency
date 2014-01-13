@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 import re
-
+#hello
 txtfile = open("median-O3.asm", "r")
 #regex = re.compile(r'\W\b\w{8}\b\W{9}\b[a-z]+\b\W{8}\b\w+,\w+,\w+')
 regex = re.compile(r'\b[a-z]+\b\W{8}\b\w+,\w+,\w+')
