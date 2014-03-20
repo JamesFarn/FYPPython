@@ -1,9 +1,9 @@
 #!/usr/bin/env python
 import re
-#hello
+
 txtfile = open("median-O3.asm", "r")
 #regex = re.compile(r'\W\b\w{8}\b\W{9}\b[a-z]+\b\W{8}\b\w+,\w+,\w+')
-regex = re.compile(r'\b[a-z]+\b\W{8}\b\w+,\w+,\w+')
+regex = re.compile(r'\b[a-z]+\s\b\w+,\w+,\w+')
 
 RowTextLocated = 0
 i = 0
@@ -14,6 +14,7 @@ for line in txtfile:
     
     expression_letter_words = regex.findall(line)
     RowTextLocated = RowTextLocated+1
+    #print regex.findall(line)
     
     for word in expression_letter_words:
                 
@@ -43,15 +44,15 @@ arrOpcodeCounti = 0
 
 for var in arr:
     if (arrCounti + 1) < i:
-
+       
         #___The Compare Variable___
-        if arr[arrCounti][2] == arr[arrCounti + 1][3] or arr[arrCounti][2] == arr[arrCounti + 1][4]:
+        if (arr[arrCounti][2] == arr[arrCounti + 1][3] or arr[arrCounti][2] == arr[arrCounti + 1][4])and int(arr[arrCounti][0])+1 == int(arr[arrCounti + 1][0]) :
 
             #___The Row That have dependency___
             #Uncomment to debug
-            #print
-            #print arr[arrCounti]
-            #print arr[arrCounti + 1]
+            print
+            print arr[arrCounti]
+            print arr[arrCounti + 1]
 
             #___Store the Opcode___
 
@@ -64,7 +65,7 @@ for var in arr:
 
 
 #print arrOpcode
-#print 
+print 
 
 #___Count and Get the most common Opcode___
 
